@@ -175,4 +175,4 @@ That is the conversation I want to have before connecting a refund tool.
 
 ---
 
-Article snapshot prepared 17 October 2026. The [website article](https://subodhjena.com/blog/before-building-an-agent-map-the-workflow) is canonical; code and fixtures are maintained in this repository. Archive spacing was selected by the author; the examples were prepared and run on 17 October 2026.
+Article snapshot prepared 17 October 2026. The [website article](https://subodhjena.com/blog/before-building-an-agent-map-the-workflow) is canonical; code and fixtures are maintained in this repository. Examples prepared and run on 17 October 2026.
