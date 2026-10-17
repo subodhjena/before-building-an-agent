@@ -43,3 +43,7 @@ Research citations are in the article. All example code, policy, data, diagram, 
 ## License
 
 The companion code, synthetic fixtures, diagram, and worksheet are available under the [MIT license](LICENSE).
+
+## Article snapshot
+
+Read the [GitHub-readable article](article.md) or the [canonical website article](https://subodhjena.com/blog/before-building-an-agent-map-the-workflow). The snapshot and selected watercolor cover were added on 17 October 2026. The original executable code remains at revision `972e6d29c22e86b35078823c57d1ccd21b9af647`.
