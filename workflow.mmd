@@ -1,0 +1,15 @@
+flowchart TD
+  A[Authenticated request] --> B[Interpret message]
+  B --> C{Valid refund proposal?}
+  C -->|No| M[Support review]
+  C -->|Yes| D{Order identifier supplied?}
+  D -->|No| Q[Ask for order reference]
+  D -->|Yes| E[Read order and check ownership]
+  E -->|Lookup failed| W[Wait for system recovery]
+  E -->|Unknown or inaccessible| Q
+  E -->|Bad record| M
+  E -->|Accessible record| F{Status and example policy}
+  F -->|Already refunded| N[No new action]
+  F -->|Exception| M
+  F -->|Within policy| H[Prepare review packet]
+  H --> I[Wait for authorized reviewer]

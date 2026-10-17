@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Untrusted refund request interpretation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["intent", "order_id"],
+  "properties": {
+    "intent": { "enum": ["refund", "other", "unclear"] },
+    "order_id": { "type": ["string", "null"], "minLength": 1, "pattern": "\\S" }
+  }
+}

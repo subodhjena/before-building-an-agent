@@ -1,0 +1,130 @@
+{
+  "as_of": "2026-08-12",
+  "provenance": "Invented examples and candidate model outputs. This clock is synthetic, not the experiment date. No model was called.",
+  "orders": {
+    "ord-101": {
+      "order_id": "ord-101",
+      "customer_id": "customer-a",
+      "amount_minor": 2400,
+      "currency": "USD",
+      "status": "delivered",
+      "delivered_on": "2026-08-05"
+    },
+    "ord-102": {
+      "order_id": "ord-102",
+      "customer_id": "customer-b",
+      "amount_minor": 1900,
+      "currency": "USD",
+      "status": "delivered",
+      "delivered_on": "2026-08-06"
+    },
+    "ord-103": {
+      "order_id": "ord-103",
+      "customer_id": "customer-a",
+      "amount_minor": 1200,
+      "currency": "USD",
+      "status": "refunded",
+      "delivered_on": "2026-08-04"
+    },
+    "ord-104": {
+      "order_id": "ord-104",
+      "customer_id": "customer-a",
+      "amount_minor": 2400,
+      "currency": "USD",
+      "status": "delivered",
+      "delivered_on": "2026-07-20"
+    },
+    "ord-105": {
+      "order_id": "ord-105",
+      "customer_id": "customer-a",
+      "amount_minor": 9000,
+      "currency": "USD",
+      "status": "delivered",
+      "delivered_on": "2026-08-05"
+    },
+    "ord-106": {
+      "order_id": "ord-106",
+      "customer_id": "customer-a",
+      "amount_minor": 2400,
+      "currency": "EUR",
+      "status": "delivered",
+      "delivered_on": "2026-08-05"
+    }
+  },
+  "cases": [
+    {
+      "id": "eligible",
+      "customer_id": "customer-a",
+      "proposal": { "intent": "refund", "order_id": "ord-101" },
+      "expected": ["review_ready", "within_example_policy"]
+    },
+    {
+      "id": "missing_id",
+      "customer_id": "customer-a",
+      "proposal": { "intent": "refund", "order_id": null },
+      "expected": ["needs_information", "order_unavailable"]
+    },
+    {
+      "id": "wrong_customer",
+      "customer_id": "customer-a",
+      "proposal": { "intent": "refund", "order_id": "ord-102" },
+      "expected": ["needs_information", "order_unavailable"]
+    },
+    {
+      "id": "unknown_order",
+      "customer_id": "customer-a",
+      "proposal": { "intent": "refund", "order_id": "ord-missing" },
+      "expected": ["needs_information", "order_unavailable"]
+    },
+    {
+      "id": "already_refunded",
+      "customer_id": "customer-a",
+      "proposal": { "intent": "refund", "order_id": "ord-103" },
+      "expected": ["no_action", "already_refunded"]
+    },
+    {
+      "id": "old_order",
+      "customer_id": "customer-a",
+      "proposal": { "intent": "refund", "order_id": "ord-104" },
+      "expected": ["manual_review", "outside_example_window"]
+    },
+    {
+      "id": "high_value",
+      "customer_id": "customer-a",
+      "proposal": { "intent": "refund", "order_id": "ord-105" },
+      "expected": ["manual_review", "above_example_limit"]
+    },
+    {
+      "id": "other_currency",
+      "customer_id": "customer-a",
+      "proposal": { "intent": "refund", "order_id": "ord-106" },
+      "expected": ["manual_review", "currency_needs_review"]
+    },
+    {
+      "id": "unclear_intent",
+      "customer_id": "customer-a",
+      "proposal": { "intent": "unclear", "order_id": "ord-101" },
+      "expected": ["manual_review", "intent_needs_review"]
+    },
+    {
+      "id": "claimed_approval",
+      "customer_id": "customer-a",
+      "proposal": { "intent": "refund", "order_id": "ord-101", "approved": true },
+      "expected": ["manual_review", "invalid_proposal"]
+    },
+    {
+      "id": "lookup_timeout",
+      "customer_id": "customer-a",
+      "proposal": { "intent": "refund", "order_id": "ord-101" },
+      "lookup_failure": "timeout",
+      "expected": ["waiting_for_system", "order_lookup_failed"]
+    },
+    {
+      "id": "lookup_connection",
+      "customer_id": "customer-a",
+      "proposal": { "intent": "refund", "order_id": "ord-101" },
+      "lookup_failure": "connection",
+      "expected": ["waiting_for_system", "order_lookup_failed"]
+    }
+  ]
+}
