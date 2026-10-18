@@ -10,7 +10,7 @@ But _handle_ is hiding most of the work. Does it mean explaining a policy, findi
 
 I would settle those questions before choosing a framework. The first artifact I want is a map of the work: how a request arrives, what people check, where it waits, and what changes when somebody acts.
 
-Below, I use an invented refund-support process to work through that map. The policy and records are synthetic. There is a [runnable example and discovery worksheet](https://subodhjena.com/downloads/blog/before-building-an-agent-map-the-workflow/workflow-example.zip) if you want to inspect or adapt the details.
+Below, I use an invented refund-support process to work through that map. The policy and records are synthetic. This repository has the [runnable example](workflow.py) and [discovery worksheet](workflow-worksheet.md) if you want to inspect or adapt the details.
 
 ## Follow a case through the existing process
 
@@ -129,7 +129,7 @@ An unknown order and an order belonging to another customer produce the same out
 
 The fixtures include twelve hand-authored candidate outputs and failure conditions. They exercise the workflow boundary without calling a model. That makes the application behavior reproducible while keeping the remaining question visible: how reliably would a model interpret real requests?
 
-Unpack the [example bundle](https://subodhjena.com/downloads/blog/before-building-an-agent-map-the-workflow/workflow-example.zip), enter its directory, and run:
+Clone the [example repository](https://github.com/subodhjena/before-building-an-agent), enter its directory, and run:
 
 ```bash
 python3 -m unittest -v
